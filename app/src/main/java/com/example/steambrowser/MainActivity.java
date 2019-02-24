@@ -1,5 +1,6 @@
 package com.example.steambrowser;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -62,6 +63,11 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.nav_manage:
                 break;
+            case R.id.dummy_game_list:
+                drawer.closeDrawers();
+                Intent gameListIntent = new Intent(this, GameListActivity.class);
+                startActivity(gameListIntent);
+                return true;
             default:
                 break;
 
