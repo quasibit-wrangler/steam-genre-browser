@@ -59,12 +59,7 @@ public class MainActivity extends AppCompatActivity
 
 
         switch(id){
-            case R.id.nav_camera:
-                break;
-            case R.id.nav_manage:
-                break;
             case R.id.dummy_game_list:
-                drawer.closeDrawers();
                 Intent gameListIntent = new Intent(this, GameListActivity.class);
                 startActivity(gameListIntent);
                 return true;
