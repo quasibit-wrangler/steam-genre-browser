@@ -5,14 +5,23 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/dummy_game_list"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Dummy Game List Activity" />
+            android:id="@+id/nav_search"
+            android:icon="@drawable/ic_menu_search"
+            android:title="Browse Genre" />
         <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:id="@+id/nav_user_prefs"
+            android:icon="@drawable/ic_menu_preferences"
+            android:title="Preferences" />
+
     </group>
 
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Share" />
+        </menu>
+    </item>
 
 </menu>
