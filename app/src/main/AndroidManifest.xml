@@ -26,7 +26,6 @@
             </intent-filter>
         </activity>
         <activity android:name="UserInfo"></activity>
-        <activity android:name="GameList"></activity>
     </application>
 
 </manifest>

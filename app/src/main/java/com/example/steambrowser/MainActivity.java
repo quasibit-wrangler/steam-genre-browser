@@ -2,20 +2,11 @@ package com.example.steambrowser;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
@@ -48,7 +39,7 @@ public class MainActivity extends AppCompatActivity
         recyclerView = findViewById(R.id.recyclerView);
 
         // set Adapter of RecyclerView
-        MyAdapter adapter = new MyAdapter(this, data);
+        MainAdapter adapter = new MainAdapter(this, data);
         recyclerView.setAdapter(adapter);
 
         // setting grid layout with three columns

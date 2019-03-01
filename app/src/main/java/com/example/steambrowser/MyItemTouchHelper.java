@@ -10,9 +10,9 @@ public class MyItemTouchHelper extends ItemTouchHelper.Callback {
 
     List<String> data;
 
-    MyAdapter adapter;
+    MainAdapter adapter;
 
-    public MyItemTouchHelper(List<String> data, MyAdapter adapter){
+    public MyItemTouchHelper(List<String> data, MainAdapter adapter){
         this.data = data;
         this.adapter = adapter;
     }

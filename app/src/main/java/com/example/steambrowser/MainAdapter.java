@@ -11,13 +11,13 @@ import android.widget.Button;
 
 import java.util.List;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
+public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
     List<String> data;
 
     Context context;
 
-    public MyAdapter(Context context, List<String> data){
+    public MainAdapter(Context context, List<String> data){
         this.context = context;
         this.data = data;
     }
@@ -38,7 +38,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         viewHolder.bt.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                Intent intent = new Intent(context, GameList.class);
+                Intent intent = new Intent(context, GameListActivity.class);
                 context.startActivity(intent);
             }
         });
