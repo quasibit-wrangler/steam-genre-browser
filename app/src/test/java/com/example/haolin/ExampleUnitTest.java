@@ -1,4 +1,4 @@
-package com.example.steambrowser;
+package com.example.haolin;
 
 import org.junit.Test;
 
