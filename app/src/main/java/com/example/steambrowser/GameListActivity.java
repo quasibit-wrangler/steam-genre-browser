@@ -8,6 +8,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,6 +22,9 @@ public class GameListActivity extends AppCompatActivity {
     private RecyclerView mGameListRecyclerView;
     private GameListAdapter mGameListAdapter;
 
+    private ProgressBar mLoadingIndicatorPB;
+    private TextView mErrorMessageTV;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +35,9 @@ public class GameListActivity extends AppCompatActivity {
 
         mGameListAdapter = new GameListAdapter();
         mGameListRecyclerView.setAdapter(mGameListAdapter);
+
+        mLoadingIndicatorPB = findViewById(R.id.pb_loading_indicator);
+        mErrorMessageTV = findViewById(R.id.tv_game_list_error_msg);
 
         /**
          * Get genre from main activity
@@ -56,7 +64,11 @@ public class GameListActivity extends AppCompatActivity {
 
     public class SteamSpySearchTask extends AsyncTask<String, Void, String> {
 
-        //TODO: show progress bar
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            mLoadingIndicatorPB.setVisibility(View.VISIBLE);
+        }
 
         @Override
         protected String doInBackground(String... urls) {
@@ -73,10 +85,16 @@ public class GameListActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
+            mLoadingIndicatorPB.setVisibility(View.INVISIBLE);
             if( s != null) {
+                mErrorMessageTV.setVisibility(View.INVISIBLE);
                 mGameListRecyclerView.setVisibility(View.VISIBLE);
                 SteamUtils.Game[] gameList = SteamUtils.parseSteamGenreResults(s);
                 mGameListAdapter.updateGameList(gameList);
+            }
+            else {
+                mGameListRecyclerView.setVisibility(View.INVISIBLE);
+                mErrorMessageTV.setVisibility(View.VISIBLE);
             }
         }
 
