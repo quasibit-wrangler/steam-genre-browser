@@ -31,6 +31,7 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.GameLi
 
     public void updateGameList(SteamUtils.Game[] games) {
         mGames = games;
+        notifyDataSetChanged();
     }
 
 
