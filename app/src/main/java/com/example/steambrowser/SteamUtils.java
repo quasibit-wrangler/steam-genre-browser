@@ -3,6 +3,12 @@ package com.example.steambrowser;
 import android.net.Uri;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class SteamUtils {
     //steamspy.com/api.php?request=genre&genre={genreID}
@@ -21,7 +27,8 @@ public class SteamUtils {
     }
 
     public static class SteamGenreResults {
-        public Game[] games;
+        Map<String, Game> idGameMap = new HashMap<>();
+//        public Game[] games;
     }
 
     public static String buildSteamGenreURL(String genre) {
@@ -33,9 +40,12 @@ public class SteamUtils {
 
     public static Game[] parseSteamGenreResults(String json) {
         Gson gson = new Gson();
-        SteamGenreResults results = gson.fromJson(json, SteamGenreResults.class);
-        if (results != null && results.games != null) {
-            return results.games;
+        // it did not like it when the genre wasn't correct..
+        //TODO:probably change to use a test query
+        Map<String, Game> results = gson.fromJson(json, new TypeToken<Map<String,Game>>(){}.getType());
+        if (results != null) {
+            Game[] games = results.values().toArray(new Game[results.size()]);
+            return games;
         }
         else {
             return null;

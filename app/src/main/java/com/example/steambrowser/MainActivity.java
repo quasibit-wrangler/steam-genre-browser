@@ -67,7 +67,6 @@ public class MainActivity extends AppCompatActivity
 
 
 
-    // TODO: put in drawer later
     @SuppressWarnings("StatementWithEmptyBody")
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
