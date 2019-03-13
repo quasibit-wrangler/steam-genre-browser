@@ -7,6 +7,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.support.v7.app.AppCompatActivity;
@@ -18,26 +19,23 @@ public class MainActivity extends AppCompatActivity
         implements View.OnClickListener {
 
     ImageView user_info;
-
-    RecyclerView recyclerView;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        user_info = findViewById(R.id.user_info);
-
-        // you should add this if you want to click the ImageView
-        user_info.setClickable(true);
-
-        user_info.setOnClickListener(this);
+//        user_info = findViewById(R.id.user_info);
+//
+//        // you should add this if you want to click the ImageView
+//        user_info.setClickable(true);
+//
+//        user_info.setOnClickListener(this);
 
         // the text displayed on nine button
         ArrayList<String> data = new ArrayList<String>();
-        for (int i = 1; i < 10; i++) {
-            data.add("Genre" + i);
-        }
+
 
         recyclerView = findViewById(R.id.recyclerView);
 
@@ -69,7 +67,6 @@ public class MainActivity extends AppCompatActivity
 
 
 
-    // TODO: put in drawer later
     @SuppressWarnings("StatementWithEmptyBody")
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
