@@ -2,6 +2,7 @@ package com.example.steambrowser;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.TypedArray;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
@@ -22,12 +23,17 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.genreViewHolde
 
     private String[] genres;
     private String[] genreValues;
+    private int[] genreIds;
+    private TypedArray genreImgs;
     Context context;
 
     public MainAdapter(Context context, List<String> data){
         this.context = context;
         genres =  context.getResources().getStringArray(R.array.genres_array);
         genreValues = context.getResources().getStringArray(R.array.genres_array_values);
+        genreImgs = context.getResources().obtainTypedArray(R.array.genres_array_ids);
+
+        Log.d("constructor test", "" + genreImgs.getResourceId(0,-1));
 
 
     }
@@ -47,7 +53,11 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.genreViewHolde
     public void onBindViewHolder(genreViewHolder vh, int position) {
         final String genreValue=genreValues[adapterpositionToArrayPosition(position)];
         final String genreName=genres[adapterpositionToArrayPosition(position)];
+        //inal int genreId=genreIds[adapterpositionToArrayPosition(position)];
+        Log.d("id test ", ""+position + adapterpositionToArrayPosition(position));
+        final int genreImgId = genreImgs.getResourceId(adapterpositionToArrayPosition(position),-1);
 
+        //final int gen=genreIds.getResourceId();
         // jump to GameList Activity when you press the genre button
         vh.mbanner.setOnClickListener(new OnClickListener() {
             @Override
@@ -57,7 +67,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.genreViewHolde
                 context.startActivity(intent);
             }
         });
-        vh.bind(genreName,genreValue);
+        vh.bind(genreName,genreValue,genreImgId);
     }
 
     @Override
@@ -78,21 +88,13 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.genreViewHolde
                 mbanner=view.findViewById(R.id.iv_genre);
                 context = c;
         }
-        void bind(String name,String value){
+        void bind(String name,String value,int id){
             mname.setText(name);
-//            int imgId = context.getResources().getIdentifier("drawable/"+value+".png", null, null);
-
-            Drawable myDrawable = context.getResources().getDrawable(R.drawable.action);
-//            mbanner.setImageDrawable(res);
-//            String PACKAGE_NAME = context.getApplicationContext().getPackageName();
-//            int imageResource = context.getResources().getIdentifier(PACKAGE_NAME+":drawable/"+value+".png", null, context.getPackageName());
-//            Drawable res = context.getResources().getDrawable(imageResource);
+//            Drawable myDrawable = context.getResources().getDrawable(id);
+            Drawable myDrawable = context.getResources().getDrawable(id);
 
            mbanner.setImageDrawable(myDrawable);
-//            mbanner.setImageBitmap(BitmapFactory.decodeResource(context.getResources(),imgId));
-            Log.d("Sbound value to: ", mname.getText().toString() + ": is the current value of the textview");
-//            mbanner.setBackground(context.getResources(R.drawable.twod));
-//            banner.setBackground(R.drawable[]);
+//
 
         }
     }
