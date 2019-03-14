@@ -15,6 +15,11 @@ public class SteamUtils {
     private final static String STEAM_GENRE_BASE_URL = "https://steamspy.com/api.php?request=genre";
     private final static String STEAM_GENRE_QUERY_PARAM = "genre";
 
+    //querying with tag:
+    //steamspy.com/api.php?request=tag&tag={genreID}
+    private final static String STEAM_TAG_BASE_URL = "https://steamspy.com/api.php?request=tag";
+    private final static String STEAM_TAG_QUERY_PARAM = "tag";
+
     //appid (int), name (String), positive (int), average_forever (int), average_2weeks (int), price (String), discount (String)
     public static class Game {
         public int appid;
@@ -26,22 +31,16 @@ public class SteamUtils {
         public String discount;
     }
 
-    public static class SteamGenreResults {
-        Map<String, Game> idGameMap = new HashMap<>();
-//        public Game[] games;
-    }
 
     public static String buildSteamGenreURL(String genre) {
-        return Uri.parse(STEAM_GENRE_BASE_URL).buildUpon()
-                .appendQueryParameter(STEAM_GENRE_QUERY_PARAM, genre)
+        return Uri.parse(STEAM_TAG_BASE_URL).buildUpon()
+                .appendQueryParameter(STEAM_TAG_QUERY_PARAM, genre)
                 .build()
                 .toString();
     }
 
     public static Game[] parseSteamGenreResults(String json) {
         Gson gson = new Gson();
-        // it did not like it when the genre wasn't correct..
-        //TODO:probably change to use a test query
         Map<String, Game> results = gson.fromJson(json, new TypeToken<Map<String,Game>>(){}.getType());
         if (results != null) {
             Game[] games = results.values().toArray(new Game[results.size()]);
