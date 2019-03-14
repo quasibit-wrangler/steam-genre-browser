@@ -11,10 +11,11 @@ import java.util.List;
 import java.util.Map;
 
 public class SteamUtils {
-    //steamspy.com/api.php?request=genre&genre={genreID}
+    //querying with tag:
+    //steamspy.com/api.php?request=tag&tag={genreID}
     private final static String STEAM_GENRE_BASE_URL = "https://steamspy.com/api.php?request=tag";
     private final static String STEAM_GENRE_QUERY_PARAM = "tag";
-    private final static String STEAM_GENRE_SORT_PARAM = "sort";
+    private final static String STEAM_GENRE_SORT_PARAM = "sort";  
 
     //appid (int), name (String), positive (int), average_forever (int), average_2weeks (int), price (String), discount (String)
     public static class Game {
@@ -27,10 +28,7 @@ public class SteamUtils {
         public String discount;
     }
 
-    public static class SteamGenreResults {
-        Map<String, Game> idGameMap = new HashMap<>();
-//        public Game[] games;
-    }
+
 
     public static String buildSteamGenreURL(String genre) {
         return Uri.parse(STEAM_GENRE_BASE_URL).buildUpon()
@@ -51,8 +49,6 @@ public class SteamUtils {
 
     public static Game[] parseSteamGenreResults(String json) {
         Gson gson = new Gson();
-        // it did not like it when the genre wasn't correct..
-        //TODO:probably change to use a test query
         Map<String, Game> results = gson.fromJson(json, new TypeToken<Map<String,Game>>(){}.getType());
         if (results != null) {
             Game[] games = results.values().toArray(new Game[results.size()]);

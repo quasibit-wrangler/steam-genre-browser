@@ -50,5 +50,30 @@
         <item>story-rich</item>
         <item>vr</item>
     </string-array>
+    <integer-array name="genres_array_ids">
+        <item>@drawable/action</item>
+        <item>@drawable/adventure</item>
+        <item>@drawable/casual</item>
+        <item>@drawable/funny</item>
+        <item>@drawable/strategy</item>
+        <item>@drawable/retro</item>
+        <item>@drawable/horror</item>
+        <item>@drawable/simulation</item>
+        <item>@drawable/rpg</item>
+        <item>@drawable/free_to_play</item>
+        <item>@drawable/violent</item>
+        <item>@drawable/single_player</item>
+        <item>@drawable/sports</item>
+        <item>@drawable/massively_multiplayer</item>
+        <item>@drawable/racing</item>
+        <item>@drawable/great_soundtrack</item>
+        <item>@drawable/multiplayer</item>
+        <item>@drawable/atmospheric</item>
+        <item>@drawable/twod</item>
+        <item>@drawable/puzzle</item>
+        <item>@drawable/anime</item>
+        <item>@drawable/story_rich</item>
+        <item>@drawable/vr</item>
+    </integer-array>
 
 </resources>
