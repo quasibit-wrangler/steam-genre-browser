@@ -47,15 +47,22 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.GameLi
 
     class GameListViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView mGameTextView;
+        private TextView mGameTV;
+        private TextView mPriceTV;
+        private TextView mVotesTV;
 
         public GameListViewHolder(@NonNull View itemView) {
             super(itemView);
-            mGameTextView = (TextView)itemView.findViewById(R.id.tv_game_text);
+            mGameTV = itemView.findViewById(R.id.tv_game_text);
+            mPriceTV = itemView.findViewById(R.id.tv_price);
+            mVotesTV = itemView.findViewById(R.id.tv_votes);
         }
 
         void bind(SteamUtils.Game game) {
-            mGameTextView.setText(game.name);
+            mGameTV.setText(game.name);
+            mPriceTV.setText("$" + game.price);
+            mVotesTV.setText("Positive: " + Integer.toString(game.positive));
+
         }
     }
 }
