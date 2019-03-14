@@ -59,7 +59,9 @@ public class GameListActivity extends AppCompatActivity {
      * Queries for the genre received from main activity
      */
     public void getGameData(String genre) {
-        String url = SteamUtils.buildSteamGenreURL(genre);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String sort = preferences.getString(getString(R.string.pref_sort_key), getString(R.string.pref_sort_default));
+        String url = SteamUtils.buildSteamGenreURL(genre, sort);
         Log.d(TAG, "querying for: " + url);
         new SteamSpySearchTask().execute(url);
     }

@@ -12,8 +12,8 @@ import java.util.Map;
 
 public class SteamUtils {
     //steamspy.com/api.php?request=genre&genre={genreID}
-    private final static String STEAM_GENRE_BASE_URL = "https://steamspy.com/api.php?request=genre";
-    private final static String STEAM_GENRE_QUERY_PARAM = "genre";
+    private final static String STEAM_GENRE_BASE_URL = "https://steamspy.com/api.php?request=tag";
+    private final static String STEAM_GENRE_QUERY_PARAM = "tag";
     private final static String STEAM_GENRE_SORT_PARAM = "sort";
 
     //appid (int), name (String), positive (int), average_forever (int), average_2weeks (int), price (String), discount (String)
