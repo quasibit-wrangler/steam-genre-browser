@@ -15,8 +15,7 @@ import android.widget.ImageView;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity
-        implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     ImageView user_info;
     private RecyclerView recyclerView;
@@ -26,12 +25,12 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        user_info = findViewById(R.id.user_info);
-//
-//        // you should add this if you want to click the ImageView
-//        user_info.setClickable(true);
-//
-//        user_info.setOnClickListener(this);
+        user_info = findViewById(R.id.user_info);
+
+        // you should add this if you want to click the ImageView
+        user_info.setClickable(true);
+
+        user_info.setOnClickListener(this);
 
         // the text displayed on nine button
         ArrayList<String> data = new ArrayList<String>();
@@ -64,8 +63,6 @@ public class MainActivity extends AppCompatActivity
             super.onBackPressed();
         }
     }
-
-
 
     @SuppressWarnings("StatementWithEmptyBody")
     public boolean onNavigationItemSelected(MenuItem item) {
