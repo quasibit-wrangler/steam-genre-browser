@@ -6,15 +6,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-<<<<<<< HEAD
 import android.support.v7.preference.PreferenceManager;
 import android.content.SharedPreferences;
-=======
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
->>>>>>> da9980e4c3356cd95446fdfe3949da0c5c022580
 
 import java.io.IOException;
 import java.util.ArrayList;
