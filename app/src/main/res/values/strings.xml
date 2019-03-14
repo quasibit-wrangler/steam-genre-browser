@@ -7,5 +7,20 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
+    <!-- Preference Strings -->
+    <string name="pref_sort_key" translatable="false">pref_sort</string>
+    <string name="pref_sort_title">Sort games by</string>
+    <string name="pref_sort_entry_price">Price</string>
+    <string name="pref_sort_entry_upvotes">Up-Votes</string>
+    <string name="pref_sort_entry_discount">Discount</string>
+    <string name="pref_sort_value_price" translatable="false">price</string>
+    <string name="pref_sort_value_upvotes" translatable="false">positive</string>
+    <string name="pref_sort_value_discount" translatable="false">discount</string>
+    <string name="pref_sort_default">@string/pref_sort_value_upvotes</string>
+    <!-- Strings for user preference -->
+    <string name="pref_user_key" translatable="false">pref_user</string>
+    <string name="pref_user_title">Steam Browser user</string>
+
+    <string name="loading_error_message">ERROR: Nothing here sorry.</string>
 
 </resources>

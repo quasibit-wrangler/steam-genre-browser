@@ -2,38 +2,18 @@ package com.example.steambrowser;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.GameListViewHolder> {
 
-    private ArrayList<String> mGameList;
-
-    public GameListAdapter() {
-        //mGameList = new ArrayList<String>();
-        mGameList = new ArrayList<String>() {{ // dummy data
-            add("GAME 1");
-            add("GAME 2");
-            add("GAME 3");
-            add("GAME 4");
-            add("GAME 5");
-            add("GAME 6");
-            add("GAME 7");
-            add("GAME 8");
-            add("GAME 9");
-            add("GAME 10");
-            add("GAME 11");
-            add("GAME 12");
-            add("GAME 13");
-            add("GAME 14");
-            add("GAME 15");
-            add("GAME 16");
-        }};
-    }
+    private SteamUtils.Game[] mGames;
 
     @NonNull
     @Override
@@ -46,14 +26,23 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.GameLi
 
     @Override
     public void onBindViewHolder(@NonNull GameListViewHolder gameListViewHolder, int pos) {
-        String gameName = mGameList.get(pos);
-        gameListViewHolder.bind(gameName);
+        gameListViewHolder.bind(mGames[pos]);
+    }
+
+    public void updateGameList(SteamUtils.Game[] games) {
+        mGames = games;
+        notifyDataSetChanged();
     }
 
 
     @Override
     public int getItemCount() {
-        return mGameList.size();
+        if(mGames != null) {
+            return mGames.length;
+        }
+        else {
+            return 0;
+        }
     }
 
     class GameListViewHolder extends RecyclerView.ViewHolder {
@@ -65,8 +54,8 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.GameLi
             mGameTextView = (TextView)itemView.findViewById(R.id.tv_game_text);
         }
 
-        void bind(String gameName) {
-            mGameTextView.setText(gameName);
+        void bind(SteamUtils.Game game) {
+            mGameTextView.setText(game.name);
         }
     }
 }
