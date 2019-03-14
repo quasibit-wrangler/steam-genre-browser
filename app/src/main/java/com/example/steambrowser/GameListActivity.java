@@ -4,6 +4,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.preference.PreferenceManager;
+import android.content.SharedPreferences;
 
 import java.util.ArrayList;
 
