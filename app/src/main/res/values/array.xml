@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="genres_array">
+        <item>Action</item>
+        <item>Adventure</item>
+        <item>Casual</item>
+        <item>Funny</item>
+        <item>Strategy</item>
+        <item>Retro</item>
+        <item>Horror</item>
+        <item>Simulation</item>
+        <item>RPG</item>
+        <item>Free-to-Play</item>
+        <item>Violent</item>
+        <item>Singleplayer</item>
+        <item>Sports</item>
+        <item>Massively-Multiplayer</item>
+        <item>Racing</item>
+        <item>Great-Soundtrack</item>
+        <item>Multiplayer</item>
+        <item>Atmospheric</item>
+        <item>2D</item>
+        <item>Puzzle</item>
+        <item>Anime</item>
+        <item>Story-Rich</item>
+        <item>VR</item>
+    </string-array>
+    <string-array name="genres_array_values">
+        <item>action</item>
+        <item>adventure</item>
+        <item>casual</item>
+        <item>funny</item>
+        <item>strategy</item>
+        <item>retro</item>
+        <item>horror</item>
+        <item>simulation</item>
+        <item>rpg</item>
+        <item>free_to_play</item>
+        <item>violent</item>
+        <item>single_player</item>
+        <item>sports</item>
+        <item>massively_multiplayer</item>
+        <item>racing</item>
+        <item>great_soundtrack</item>
+        <item>multiplayer</item>
+        <item>atmospheric</item>
+        <item>twod</item>
+        <item>puzzle</item>
+        <item>anime</item>
+        <item>story-rich</item>
+        <item>vr</item>
+    </string-array>
+    <integer-array name="genres_array_ids">
+        <item>@drawable/action</item>
+        <item>@drawable/adventure</item>
+        <item>@drawable/casual</item>
+        <item>@drawable/funny</item>
+        <item>@drawable/strategy</item>
+        <item>@drawable/retro</item>
+        <item>@drawable/horror</item>
+        <item>@drawable/simulation</item>
+        <item>@drawable/rpg</item>
+        <item>@drawable/free_to_play</item>
+        <item>@drawable/violent</item>
+        <item>@drawable/single_player</item>
+        <item>@drawable/sports</item>
+        <item>@drawable/massively_multiplayer</item>
+        <item>@drawable/racing</item>
+        <item>@drawable/great_soundtrack</item>
+        <item>@drawable/multiplayer</item>
+        <item>@drawable/atmospheric</item>
+        <item>@drawable/twod</item>
+        <item>@drawable/puzzle</item>
+        <item>@drawable/anime</item>
+        <item>@drawable/story_rich</item>
+        <item>@drawable/vr</item>
+    </integer-array>
+
+</resources>

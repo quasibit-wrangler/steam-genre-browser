@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/bt"
     android:layout_width="match_parent"
     android:layout_height="100dp"
+    android:orientation="vertical"
     android:background="#CFCFCF"
     android:gravity="center">
 
-    <Button
-        android:id="@+id/bt"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#00000000"/>
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/iv_genre"
+        android:layout_width="wrap_content"
+        android:layout_height="75dp" />
+
+    <TextView
+        android:id="@+id/tv_genre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="adfdsaf"
+        android:textColor="#000000" />
 
 </LinearLayout>
