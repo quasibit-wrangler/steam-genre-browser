@@ -11,9 +11,6 @@ import java.util.List;
 import java.util.Map;
 
 public class SteamUtils {
-    //steamspy.com/api.php?request=genre&genre={genreID}
-    private final static String STEAM_GENRE_BASE_URL = "https://steamspy.com/api.php?request=genre";
-    private final static String STEAM_GENRE_QUERY_PARAM = "genre";
 
     //querying with tag:
     //steamspy.com/api.php?request=tag&tag={genreID}
@@ -30,6 +27,7 @@ public class SteamUtils {
         public String price;
         public String discount;
     }
+
 
 
     public static String buildSteamGenreURL(String genre) {

@@ -62,6 +62,7 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.GameLi
             mGameTV.setText(game.name);
             mPriceTV.setText("$" + game.price);
             mVotesTV.setText("Positive: " + Integer.toString(game.positive));
+
         }
     }
 }
