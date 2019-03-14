@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="pref_sort_entries">
+        <item>@string/pref_sort_entry_price</item>
+        <item>@string/pref_sort_entry_upvotes</item>
+        <item>@string/pref_sort_entry_discount</item>
+    </string-array>
+
+    <string-array name="pref_sort_values">
+        <item></item>
+        <item>@string/pref_sort_value_price</item>
+        <item>@string/pref_sort_value_upvotes</item>
+        <item>@string/pref_sort_value_discount</item>
+    </string-array>
+</resources>
