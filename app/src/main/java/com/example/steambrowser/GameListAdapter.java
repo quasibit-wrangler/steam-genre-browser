@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.GameListViewHolder> {
 
@@ -29,7 +30,22 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.GameLi
         gameListViewHolder.bind(mGames[pos]);
     }
 
-    public void updateGameList(SteamUtils.Game[] games) {
+    public void updateGameList(SteamUtils.Game[] games, String sort) {
+        if(sort.equals("positive")) {
+            //sort by positive
+            Arrays.sort(games, new PositiveCmp());
+        }
+
+        else if(sort.equals("price")) {
+            //sort by price
+            Arrays.sort(games, new PriceCmp());
+        }
+
+        else if(sort.equals("discount")) {
+            //sort by price
+            Arrays.sort(games, new DiscountCmp());
+        }
+
         mGames = games;
         notifyDataSetChanged();
     }

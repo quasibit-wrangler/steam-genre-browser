@@ -15,7 +15,6 @@ public class SteamUtils {
     //steamspy.com/api.php?request=tag&tag={genreID}
     private final static String STEAM_GENRE_BASE_URL = "https://steamspy.com/api.php?request=tag";
     private final static String STEAM_GENRE_QUERY_PARAM = "tag";
-    private final static String STEAM_GENRE_SORT_PARAM = "sort";  
 
     //appid (int), name (String), positive (int), average_forever (int), average_2weeks (int), price (String), discount (String)
     public static class Game {
@@ -35,16 +34,6 @@ public class SteamUtils {
                 .appendQueryParameter(STEAM_GENRE_QUERY_PARAM, genre)
                 .build()
                 .toString();
-    }
-
-    public static String buildSteamGenreURL(String genre, String sort) {
-        Uri.Builder builder = Uri.parse(STEAM_GENRE_BASE_URL).buildUpon();
-        builder.appendQueryParameter(STEAM_GENRE_QUERY_PARAM, genre);
-        if (!sort.equals("")) {
-            builder.appendQueryParameter(STEAM_GENRE_SORT_PARAM, sort);
-        }
-
-        return builder.build().toString();
     }
 
     public static Game[] parseSteamGenreResults(String json) {

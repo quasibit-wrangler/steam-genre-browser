@@ -27,6 +27,8 @@ public class GameListActivity extends AppCompatActivity {
     private ProgressBar mLoadingIndicatorPB;
     private TextView mErrorMessageTV;
 
+    private String sort;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +42,9 @@ public class GameListActivity extends AppCompatActivity {
 
         mLoadingIndicatorPB = findViewById(R.id.pb_loading_indicator);
         mErrorMessageTV = findViewById(R.id.tv_game_list_error_msg);
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        sort = preferences.getString(getString(R.string.pref_sort_key), getString(R.string.pref_sort_default));
 
         /**
          * Get genre from main activity
@@ -59,9 +64,7 @@ public class GameListActivity extends AppCompatActivity {
      * Queries for the genre received from main activity
      */
     public void getGameData(String genre) {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String sort = preferences.getString(getString(R.string.pref_sort_key), getString(R.string.pref_sort_default));
-        String url = SteamUtils.buildSteamGenreURL(genre, sort);
+        String url = SteamUtils.buildSteamGenreURL(genre);
         Log.d(TAG, "querying for: " + url);
         new SteamSpySearchTask().execute(url);
     }
@@ -94,7 +97,7 @@ public class GameListActivity extends AppCompatActivity {
                 mErrorMessageTV.setVisibility(View.INVISIBLE);
                 mGameListRecyclerView.setVisibility(View.VISIBLE);
                 SteamUtils.Game[] gameList = SteamUtils.parseSteamGenreResults(s);
-                mGameListAdapter.updateGameList(gameList);
+                mGameListAdapter.updateGameList(gameList, sort);
             }
             else {
                 mGameListRecyclerView.setVisibility(View.INVISIBLE);
