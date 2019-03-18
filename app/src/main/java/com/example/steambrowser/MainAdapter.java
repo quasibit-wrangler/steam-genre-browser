@@ -18,6 +18,7 @@ import java.util.List;
 
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.genreViewHolder> {
     static final String GENRE_EXTRA_KEY = "key for intent.containsExtra(key)";
+    static final String GENRE_NAME_KEY = "GENRE NAME";
 
     private String[] genres;
     private String[] genreValues;
@@ -61,7 +62,8 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.genreViewHolde
             @Override
             public void onClick(View arg0) {
                 Intent intent = new Intent(context, GameListActivity.class);
-                intent.putExtra(GENRE_EXTRA_KEY,genreValue);
+                intent.putExtra(GENRE_EXTRA_KEY, genreValue);
+                intent.putExtra(GENRE_NAME_KEY, genreName);
                 context.startActivity(intent);
             }
         });

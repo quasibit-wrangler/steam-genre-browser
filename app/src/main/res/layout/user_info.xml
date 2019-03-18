@@ -6,24 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:background="#1d9a8a">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="User Info"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:layout_alignParentLeft="true" />
-
-    </RelativeLayout>
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -34,6 +18,15 @@
             android:name="com.example.steambrowser.PrefFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
+        <!--Line separator-->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="#dadada" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerView"

@@ -19,6 +19,7 @@ public class GameListActivity extends AppCompatActivity {
 
     private static final String TAG = GameListActivity.class.getSimpleName();
     static final String GENRE_EXTRA_KEY = "key for intent.containsExtra(key)";
+    static final String GENRE_NAME_KEY = "GENRE NAME";
 
     private RecyclerView mGameListRecyclerView;
     private GameListAdapter mGameListAdapter;
@@ -29,6 +30,10 @@ public class GameListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getSupportActionBar().setTitle("Genre");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         setContentView(R.layout.activity_game_list);
         mGameListRecyclerView = findViewById(R.id.rv_game_list);
         mGameListRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -46,6 +51,8 @@ public class GameListActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if(intent != null && intent.hasExtra(GENRE_EXTRA_KEY)) {
             String genreToQuery = (String)intent.getSerializableExtra(GENRE_EXTRA_KEY);
+            String genreTitle = (String)intent.getSerializableExtra(GENRE_NAME_KEY);
+            getSupportActionBar().setTitle(genreTitle);
             getGameData(genreToQuery);
         }
         else {
