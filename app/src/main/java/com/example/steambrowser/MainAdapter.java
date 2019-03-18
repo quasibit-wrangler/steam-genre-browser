@@ -3,7 +3,6 @@ package com.example.steambrowser;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -12,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -53,7 +51,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.genreViewHolde
     public void onBindViewHolder(genreViewHolder vh, int position) {
         final String genreValue=genreValues[adapterpositionToArrayPosition(position)];
         final String genreName=genres[adapterpositionToArrayPosition(position)];
-        //inal int genreId=genreIds[adapterpositionToArrayPosition(position)];
+        //final int genreId=genreIds[adapterpositionToArrayPosition(position)];
         Log.d("id test ", ""+position + adapterpositionToArrayPosition(position));
         final int genreImgId = genreImgs.getResourceId(adapterpositionToArrayPosition(position),-1);
 

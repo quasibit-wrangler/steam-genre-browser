@@ -1,20 +1,24 @@
 package com.example.steambrowser;
 
+import android.content.ContentValues;
+import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-
 public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.GameListViewHolder> {
 
     private SteamUtils.Game[] mGames;
+
+    private Context context;
+
+    public GameListAdapter(Context context) {
+        this.context = context;
+    }
 
     @NonNull
     @Override
@@ -26,26 +30,31 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.GameLi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull GameListViewHolder gameListViewHolder, int pos) {
+    public void onBindViewHolder(@NonNull GameListViewHolder gameListViewHolder, final int pos) {
         gameListViewHolder.bind(mGames[pos]);
+        // jump to the detail game activity when user click the item
+        gameListViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                // store appid to SQLite if this adapter belong to GameListActivity
+                // avoid storing appid to SQLite again when clicking item in UserInfo
+                if(context instanceof GameListActivity) {
+                    ContentValues values = new ContentValues();
+                    values.put("appid", mGames[pos].appid);
+                    values.put("name", mGames[pos].name);
+                    values.put("positive", mGames[pos].positive);
+                    values.put("price", mGames[pos].price);
+                    MainActivity.db.insert("game", null, values);
+                }
+
+                Intent intent = new Intent(context, GameDetailActivity.class);
+                intent.putExtra("appid", mGames[pos].appid);
+                context.startActivity(intent);
+            }
+        });
     }
 
-    public void updateGameList(SteamUtils.Game[] games, String sort) {
-        if(sort.equals("positive")) {
-            //sort by positive
-            Arrays.sort(games, new PositiveCmp());
-        }
-
-        else if(sort.equals("price")) {
-            //sort by price
-            Arrays.sort(games, new PriceCmp());
-        }
-
-        else if(sort.equals("discount")) {
-            //sort by price
-            Arrays.sort(games, new DiscountCmp());
-        }
-
+    public void updateGameList(SteamUtils.Game[] games) {
         mGames = games;
         notifyDataSetChanged();
     }
