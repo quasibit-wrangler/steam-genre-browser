@@ -1,25 +1,25 @@
 package com.example.steambrowser;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.preference.PreferenceManager;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.preference.PreferenceManager;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class GameListActivity extends AppCompatActivity {
 
     private static final String TAG = GameListActivity.class.getSimpleName();
     static final String GENRE_EXTRA_KEY = "key for intent.containsExtra(key)";
-    static final String GENRE_NAME_KEY = "GENRE NAME";
 
     private RecyclerView mGameListRecyclerView;
     private GameListAdapter mGameListAdapter;
@@ -27,13 +27,11 @@ public class GameListActivity extends AppCompatActivity {
     private ProgressBar mLoadingIndicatorPB;
     private TextView mErrorMessageTV;
 
+    private String sort;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        getSupportActionBar().setTitle("Genre");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         setContentView(R.layout.activity_game_list);
         mGameListRecyclerView = findViewById(R.id.rv_game_list);
         mGameListRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -45,14 +43,15 @@ public class GameListActivity extends AppCompatActivity {
         mLoadingIndicatorPB = findViewById(R.id.pb_loading_indicator);
         mErrorMessageTV = findViewById(R.id.tv_game_list_error_msg);
 
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        sort = preferences.getString(getString(R.string.pref_sort_key), getString(R.string.pref_sort_default));
+
         /**
          * Get genre from main activity
          */
         Intent intent = getIntent();
         if(intent != null && intent.hasExtra(GENRE_EXTRA_KEY)) {
             String genreToQuery = (String)intent.getSerializableExtra(GENRE_EXTRA_KEY);
-            String genreTitle = (String)intent.getSerializableExtra(GENRE_NAME_KEY);
-            getSupportActionBar().setTitle(genreTitle);
             getGameData(genreToQuery);
         }
         else {
@@ -65,9 +64,7 @@ public class GameListActivity extends AppCompatActivity {
      * Queries for the genre received from main activity
      */
     public void getGameData(String genre) {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String sort = preferences.getString(getString(R.string.pref_sort_key), getString(R.string.pref_sort_default));
-        String url = SteamUtils.buildSteamGenreURL(genre, sort);
+        String url = SteamUtils.buildSteamGenreURL(genre);
         Log.d(TAG, "querying for: " + url);
         new SteamSpySearchTask().execute(url);
     }
@@ -100,7 +97,7 @@ public class GameListActivity extends AppCompatActivity {
                 mErrorMessageTV.setVisibility(View.INVISIBLE);
                 mGameListRecyclerView.setVisibility(View.VISIBLE);
                 SteamUtils.Game[] gameList = SteamUtils.parseSteamGenreResults(s);
-                mGameListAdapter.updateGameList(gameList);
+                mGameListAdapter.updateGameList(gameList, sort);
             }
             else {
                 mGameListRecyclerView.setVisibility(View.INVISIBLE);

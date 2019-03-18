@@ -44,6 +44,6 @@ public class UserInfo extends AppCompatActivity {
         // set adapter for RecyclerView
         GameListAdapter mGameListAdapter = new GameListAdapter(this);
         recyclerView.setAdapter(mGameListAdapter);
-        mGameListAdapter.updateGameList(gameArray);
+        mGameListAdapter.updateGameList(gameArray, "positive");  // TODO: temporary sort by
     }
 }
