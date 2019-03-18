@@ -3,7 +3,6 @@ package com.example.steambrowser;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -12,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,6 +18,7 @@ import java.util.List;
 
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.genreViewHolder> {
     static final String GENRE_EXTRA_KEY = "key for intent.containsExtra(key)";
+    static final String GENRE_NAME_KEY = "GENRE NAME";
 
     private String[] genres;
     private String[] genreValues;
@@ -53,7 +52,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.genreViewHolde
     public void onBindViewHolder(genreViewHolder vh, int position) {
         final String genreValue=genreValues[adapterpositionToArrayPosition(position)];
         final String genreName=genres[adapterpositionToArrayPosition(position)];
-        //inal int genreId=genreIds[adapterpositionToArrayPosition(position)];
+        //final int genreId=genreIds[adapterpositionToArrayPosition(position)];
         Log.d("id test ", ""+position + adapterpositionToArrayPosition(position));
         final int genreImgId = genreImgs.getResourceId(adapterpositionToArrayPosition(position),-1);
 
@@ -63,7 +62,8 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.genreViewHolde
             @Override
             public void onClick(View arg0) {
                 Intent intent = new Intent(context, GameListActivity.class);
-                intent.putExtra(GENRE_EXTRA_KEY,genreValue);
+                intent.putExtra(GENRE_EXTRA_KEY, genreValue);
+                intent.putExtra(GENRE_NAME_KEY, genreName);
                 context.startActivity(intent);
             }
         });

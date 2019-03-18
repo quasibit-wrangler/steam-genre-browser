@@ -37,7 +37,7 @@ public class GameListActivity extends AppCompatActivity {
         mGameListRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mGameListRecyclerView.setHasFixedSize(true);
 
-        mGameListAdapter = new GameListAdapter();
+        mGameListAdapter = new GameListAdapter(this);
         mGameListRecyclerView.setAdapter(mGameListAdapter);
 
         mLoadingIndicatorPB = findViewById(R.id.pb_loading_indicator);

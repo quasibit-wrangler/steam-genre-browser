@@ -1,16 +1,16 @@
 package com.example.steambrowser;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
@@ -19,6 +19,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     ImageView user_info;
     private RecyclerView recyclerView;
+
+    public static SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ItemTouchHelper.Callback callback = new MyItemTouchHelper(data, adapter);
         ItemTouchHelper helper = new ItemTouchHelper(callback);
         helper.attachToRecyclerView(recyclerView);
+
+        // get a SQLiteDatabase object
+        SQLiteHelper mSQLiteHelper = new SQLiteHelper(this);
+        db = mSQLiteHelper.getWritableDatabase();
     }
 
     @Override

@@ -22,5 +22,6 @@
     <string name="pref_user_title">Steam Browser user</string>
 
     <string name="loading_error_message">ERROR: Nothing here sorry.</string>
+    <string name="preferences_heading">Preferences</string>
 
 </resources>
