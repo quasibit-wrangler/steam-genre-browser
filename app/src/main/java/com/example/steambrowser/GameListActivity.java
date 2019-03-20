@@ -14,20 +14,33 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class GameListActivity extends AppCompatActivity implements GameListAdapter.onGameLongPressListener {
+
+public class GameListActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<String>,
+                                      GameListAdapter.onGameLongPressListener {
 
     private static final String TAG = GameListActivity.class.getSimpleName();
     static final String GENRE_EXTRA_KEY = "key for intent.containsExtra(key)";
+
+    private static final String GAMES_ARRAY_KEY = "steamGames";
+    private static final String GENRE_URL_KEY = "steamGenreURL";
+
+    private static final int STEAM_LOADER_ID = 0;
 
     private RecyclerView mGameListRecyclerView;
     private GameListAdapter mGameListAdapter;
 
     private ProgressBar mLoadingIndicatorPB;
     private TextView mErrorMessageTV;
+
+    private SteamUtils.Game[] mGames;
 
     private String sort;
 
@@ -49,7 +62,7 @@ public class GameListActivity extends AppCompatActivity implements GameListAdapt
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         sort = preferences.getString(getString(R.string.pref_sort_key), getString(R.string.pref_sort_default));
 
-        /**
+        /*
          * Get genre from main activity
          */
         Intent intent = getIntent();
@@ -60,6 +73,13 @@ public class GameListActivity extends AppCompatActivity implements GameListAdapt
         else {
             Log.d(TAG, "Did not get a genre");
         }
+
+        if (savedInstanceState != null && savedInstanceState.containsKey(GAMES_ARRAY_KEY)) {
+            mGames = (SteamUtils.Game[]) savedInstanceState.getSerializable(GAMES_ARRAY_KEY);
+            mGameListAdapter.updateGameList(mGames, sort);
+        }
+
+        getSupportLoaderManager().initLoader(STEAM_LOADER_ID, null, this);
 
     }
 
@@ -91,47 +111,50 @@ public class GameListActivity extends AppCompatActivity implements GameListAdapt
     public void getGameData(String genre) {
         String url = SteamUtils.buildSteamGenreURL(genre);
         Log.d(TAG, "querying for: " + url);
-        new SteamSpySearchTask().execute(url);
+        Bundle args = new Bundle();
+        args.putString(GENRE_URL_KEY, url);
+        mLoadingIndicatorPB.setVisibility(View.VISIBLE);
+        getSupportLoaderManager().restartLoader(STEAM_LOADER_ID, args, this);
+        //new SteamSpySearchTask().execute(url);
     }
 
-    public class SteamSpySearchTask extends AsyncTask<String, Void, String> {
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            mLoadingIndicatorPB.setVisibility(View.VISIBLE);
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (mGames != null) {
+            outState.putSerializable(GAMES_ARRAY_KEY, mGames);
         }
-
-        @Override
-        protected String doInBackground(String... urls) {
-            String searchURL = urls[0];
-            String results = null;
-            try {
-                results = NetworkUtils.doHTTPGet(searchURL);
-            }
-            catch (IOException e) {
-                e.printStackTrace();
-            }
-            return results;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            mLoadingIndicatorPB.setVisibility(View.INVISIBLE);
-            if( s != null) {
-                mErrorMessageTV.setVisibility(View.INVISIBLE);
-                mGameListRecyclerView.setVisibility(View.VISIBLE);
-                SteamUtils.Game[] gameList = SteamUtils.parseSteamGenreResults(s);
-                mGameListAdapter.updateGameList(gameList, sort);
-            }
-            else {
-                mGameListRecyclerView.setVisibility(View.INVISIBLE);
-                mErrorMessageTV.setVisibility(View.VISIBLE);
-            }
-        }
-
-
     }
 
+    @NonNull
+    @Override
+    public Loader<String> onCreateLoader(int i, @Nullable Bundle bundle) {
+        String url = null;
+        if (bundle != null) {
+            url = bundle.getString(GENRE_URL_KEY);
+        }
+        return new SteamLoader(this, url);
+    }
+
+    @Override
+    public void onLoadFinished(@NonNull Loader<String> loader, String s) {
+        Log.d(TAG, "Got results from the loader");
+        if( s != null) {
+            mErrorMessageTV.setVisibility(View.INVISIBLE);
+            mGameListRecyclerView.setVisibility(View.VISIBLE);
+            SteamUtils.Game[] gameList = SteamUtils.parseSteamGenreResults(s);
+            mGameListAdapter.updateGameList(gameList, sort);
+        }
+        else {
+            mGameListRecyclerView.setVisibility(View.INVISIBLE);
+            mErrorMessageTV.setVisibility(View.VISIBLE);
+        }
+        mLoadingIndicatorPB.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void onLoaderReset(@NonNull Loader<String> loader) {
+        // Nothing to do here...
+    }
 
 }
