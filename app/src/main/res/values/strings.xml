@@ -23,5 +23,6 @@
 
     <string name="loading_error_message">ERROR: Nothing here sorry.</string>
     <string name="preferences_heading">Preferences</string>
+    <string name="free_text">Free to play</string>
 
 </resources>
