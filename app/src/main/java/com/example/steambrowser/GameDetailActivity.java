@@ -15,6 +15,9 @@ public class GameDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_detail);
 
+        getSupportActionBar().setTitle("Info");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         // get appid from Intent
         Intent intent = getIntent();
         int appid = intent.getIntExtra("appid", 0);
