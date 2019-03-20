@@ -1,7 +1,9 @@
 package com.example.steambrowser;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.support.v4.app.ShareCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,7 +18,7 @@ import android.widget.TextView;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class GameListActivity extends AppCompatActivity {
+public class GameListActivity extends AppCompatActivity implements GameListAdapter.onGameLongPressListener {
 
     private static final String TAG = GameListActivity.class.getSimpleName();
     static final String GENRE_EXTRA_KEY = "key for intent.containsExtra(key)";
@@ -29,6 +31,7 @@ public class GameListActivity extends AppCompatActivity {
 
     private String sort;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +40,7 @@ public class GameListActivity extends AppCompatActivity {
         mGameListRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mGameListRecyclerView.setHasFixedSize(true);
 
-        mGameListAdapter = new GameListAdapter(this);
+        mGameListAdapter = new GameListAdapter(this,this);
         mGameListRecyclerView.setAdapter(mGameListAdapter);
 
         mLoadingIndicatorPB = findViewById(R.id.pb_loading_indicator);
@@ -59,6 +62,28 @@ public class GameListActivity extends AppCompatActivity {
         }
 
     }
+
+//    gets a video game mVG and opens up the url according to that
+//    and Shares the game to anything that allows a string.
+    @Override
+    public void onGamePresss(SteamUtils.Game mVG){
+        String from = "Steam-Browser App";
+        if (mVG != null) {
+
+            String shareText = "I would like to show you this sweet game I found from " + from + "\n";
+            shareText+="\n Details: \n\t" + mVG.name;
+            shareText+="\n\tCost: "+mVG.price;
+            shareText+="\n\tVotes: "+mVG.positive;
+            shareText+="\n\tWEBLINK: "+ "https://store.steampowered.com/app/"+mVG.appid;
+
+            ShareCompat.IntentBuilder.from(this)
+                    .setType("text/plain")
+                    .setText(shareText)
+                    .setChooserTitle("check out this steam game")
+                    .startChooser();
+        }
+    }
+
 
     /**
      * Queries for the genre received from main activity
