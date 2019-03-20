@@ -174,8 +174,17 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.GameLi
         void bind(SteamUtils.Game game) {
             appId = game.appid;
             mGameTV.setText(game.name);
-            mPriceTV.setText("$" + game.price);
-            mVotesTV.setText("Positive: " + Integer.toString(game.positive));
+
+            String priceWithDecimal = game.price;
+            if(priceWithDecimal.length() >= 2) {
+                priceWithDecimal = new StringBuilder(priceWithDecimal).insert(priceWithDecimal.length()-2, ".").toString();
+                mPriceTV.setText(String.format("$%s", priceWithDecimal));
+            }
+            else {
+                mPriceTV.setText(context.getString(R.string.free_text));
+            }
+
+            mVotesTV.setText(String.format("Positive: %s", Integer.toString(game.positive)));
 
         }
     }
