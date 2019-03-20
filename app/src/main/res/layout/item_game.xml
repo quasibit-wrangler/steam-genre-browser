@@ -4,39 +4,43 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp">
-
-
-    <TextView
-        android:id="@+id/tv_game_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="22sp"
-        android:padding="6dp"
-        android:textColor="#000"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+    android:padding="16dp"
+    >
 
         <TextView
-            android:id="@+id/tv_votes"
+            android:id="@+id/tv_game_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:padding="6dp" />
+            android:textSize="22sp"
+            android:padding="6dp"
+            android:textColor="#000"/>
 
-        <TextView
-            android:id="@+id/tv_price"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:layout_marginLeft="8dp"
-            android:textColor="#4baa6e"/>
+            android:orientation="horizontal"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            >
+
+            <TextView
+                android:id="@+id/tv_votes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:padding="6dp" />
+
+            <TextView
+                android:id="@+id/tv_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:layout_marginLeft="8dp"
+                android:textColor="#4baa6e"/>
 
 
-    </LinearLayout>
+        </LinearLayout>
 
     <!--Line separator-->
     <View
