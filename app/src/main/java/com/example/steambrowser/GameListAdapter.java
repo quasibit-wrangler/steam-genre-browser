@@ -111,6 +111,7 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.GameLi
         private TextView mGameTV;
         private TextView mPriceTV;
         private TextView mVotesTV;
+        private TextView mDiscountTV;
         private Context c;
 
         public GameListViewHolder(@NonNull View itemView,Context con) {
@@ -118,6 +119,7 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.GameLi
             mGameTV = itemView.findViewById(R.id.tv_game_text);
             mPriceTV = itemView.findViewById(R.id.tv_price);
             mVotesTV = itemView.findViewById(R.id.tv_votes);
+            mDiscountTV = itemView.findViewById(R.id.tv_discount);
             c = con;
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
@@ -145,6 +147,7 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.GameLi
                     values.put("name", mGame.name);
                     values.put("positive", mGame.positive);
                     values.put("price", mGame.price);
+                    //TODO: also put discount
                     MainActivity.db.insert("game", null, values);
                 }
 
@@ -185,6 +188,13 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.GameLi
             }
 
             mVotesTV.setText(String.format("Positive: %s", Integer.toString(game.positive)));
+
+            if(game.discount != null) {
+                if(!(game.discount.equals("0"))) {
+                    mDiscountTV.setText(String.format("%s%% OFF", game.discount));
+                }
+            }
+
 
         }
     }
